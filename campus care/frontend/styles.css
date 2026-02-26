@@ -1,0 +1,70 @@
+:root{
+  --bg:#f1f5f9;
+  --card:#ffffff;
+  --accent:#b30000; /* SRM red */
+  --accent-2:#ffb84d; /* warm accent */
+  --muted:#5b6270;
+  --glass: rgba(255,255,255,0.6);
+}
+*{box-sizing:border-box}
+.body{font-family:Inter, system-ui, Arial, sans-serif;background:var(--bg);margin:0;color:#111}
+.body, body{font-family:Inter, system-ui, Arial, sans-serif;background:var(--bg);margin:0;color:#111}
+.app-root{min-height:100vh}
+.cc-header{display:flex;align-items:center;justify-content:space-between;padding:12px 28px;background:linear-gradient(90deg, rgba(179,0,0,0.06), rgba(255,184,77,0.03));backdrop-filter: blur(6px);}
+.brand{display:flex;align-items:center;gap:12px}
+.college-logo{height:36px}
+.brand-text{font-weight:700;color:var(--accent);font-size:18px}
+.profile{display:flex;align-items:center;gap:12px;color:var(--muted)}
+.avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,0,0,0.06)}
+.profile-text{font-size:14px;color:var(--muted)}
+.auth-page{display:flex;align-items:center;justify-content:center;height:100vh;background: radial-gradient(circle at 10% 10%, rgba(179,0,0,0.04), transparent 10%), linear-gradient(180deg,#f8fafc,#f1f5f9)}
+.auth-card{width:420px;padding:22px;border-radius:12px;background:linear-gradient(180deg,var(--glass),var(--card));box-shadow:0 12px 30px rgba(16,24,40,0.12);border:1px solid rgba(0,0,0,0.03)}
+.card{background:var(--card);padding:20px;border-radius:10px;box-shadow:0 10px 30px rgba(16,24,40,0.08);}
+.auth-card h2{margin:6px 0 12px}
+.card-logo{height:36px;margin-bottom:8px}
+.corner-logo{position:absolute;top:18px;right:18px;height:40px;opacity:0.95}
+
+.hero{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.hero-mark{font-size:88px;color:var(--accent);opacity:0.06;font-weight:800;letter-spacing:6px;transform:rotate(-8deg)}
+
+.mode-toggle{display:flex;gap:8px;margin-bottom:12px}
+.btn-toggle{flex:1;padding:8px 12px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent;color:var(--muted);cursor:pointer}
+.btn-toggle.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent;box-shadow:0 8px 24px rgba(179,0,0,0.12)}
+
+.form-error{color:#b30000;font-size:13px;margin-top:6px}
+
+.field-row{display:flex;gap:12px}
+.field-row .small{flex:1}
+.field{margin:12px 0}
+.field label{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}
+.field input, .field select{width:100%;padding:12px;border:1px solid #e6e9ef;border-radius:8px;transition:box-shadow .15s ease,border-color .15s ease}
+.field input:focus, .field select:focus{outline:none;border-color:var(--accent);box-shadow:0 6px 18px rgba(179,0,0,0.06)}
+.actions{margin-top:18px;display:flex;justify-content:flex-end}
+.btn{background:var(--accent);color:#fff;padding:10px 16px;border:none;border-radius:8px;cursor:pointer;box-shadow:0 6px 18px rgba(179,0,0,0.12);transition:transform .12s ease,box-shadow .12s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 18px 36px rgba(179,0,0,0.12)}
+.dashboard-body{padding:36px;display:flex;justify-content:center}
+.dashboard-card{width:760px}
+.dashboard-banner{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.banner-logo{height:44px}
+.issue-form label{display:block;margin-bottom:12px}
+.issue-form h2{margin-top:0}
+
+/* File uploader */
+.file-uploader .file-row{display:flex;align-items:center;gap:12px}
+.file-uploader input[type="file"]{border:0;padding:0}
+.file-info{font-size:13px;color:var(--muted)}
+.file-none{color:#9aa0a6}
+.preview{margin-top:10px}
+.preview-img{width:200px;height:140px;object-fit:cover;border-radius:8px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 6px 18px rgba(16,24,40,0.06)}
+
+/* tweak auth container stacking */
+.auth-page{position:relative}
+.auth-card{position:relative;z-index:2}
+
+
+/* small screens */
+@media (max-width:640px){
+  .auth-card{width:92%;padding:16px}
+  .dashboard-card{width:92%}
+  .brand-text{display:none}
+}
