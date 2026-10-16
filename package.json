@@ -1,0 +1,17 @@
+{
+  "name": "campus-maintenance-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Campus Maintenance System v1 - React + FastAPI + PostgreSQL",
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "dev": "node scripts/dev.mjs",
+    "dev:backend": "node scripts/dev.mjs --backend",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "test": "node scripts/test.mjs",
+    "build": "npm --prefix frontend run build"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

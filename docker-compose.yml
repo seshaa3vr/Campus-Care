@@ -1,0 +1,62 @@
+# Campus Maintenance System v1
+#   cp .env.example .env      # then review the values
+#   docker compose up --build
+# Web app: http://localhost:8080   API docs: http://localhost:8080/docs
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-campus_maintenance}
+      POSTGRES_USER: ${POSTGRES_USER:-campus}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env (cp .env.example .env)}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    environment:
+      ENVIRONMENT: production
+      DATABASE_URL: postgresql://${POSTGRES_USER:-campus}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-campus_maintenance}
+      SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY in .env (cp .env.example .env)}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES:-120}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:8080}
+      UPLOAD_DIR: /app/uploads
+      MAX_UPLOAD_SIZE: ${MAX_UPLOAD_SIZE:-5242880}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      # nginx is the only client and sets X-Real-IP, so per-IP rate limiting sees real clients.
+      TRUST_PROXY_HEADERS: "true"
+      SEED_DATA: ${SEED_DATA:-true}
+    volumes:
+      - uploads:/app/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+    # Bound to localhost only: public traffic must come through nginx.
+    ports:
+      - "127.0.0.1:8010:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_BASE_URL: /api
+        VITE_SHOW_DEMO_ACCOUNTS: ${SHOW_DEMO_ACCOUNTS:-true}
+        VITE_MAX_UPLOAD_MB: ${VITE_MAX_UPLOAD_MB:-5}
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "${WEB_PORT:-8080}:80"
+
+volumes:
+  postgres_data:
+  uploads:
