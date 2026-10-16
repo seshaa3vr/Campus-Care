@@ -4,6 +4,12 @@ A full-stack campus maintenance management platform designed to streamline issue
 
 Campus Care enables students and staff to report maintenance issues such as Wi-Fi problems, electrical faults, plumbing issues, air-conditioning failures, and classroom equipment malfunctions. Administrators can prioritize complaints and assign technicians, while maintenance staff can update progress and resolve issues through a structured workflow.
 
+## 🌐 Live Demo
+
+🚀 **[Visit Campus Care — Live Website](https://campus-care-seshaa3.netlify.app)**
+
+Explore the Campus Care interface and experience the smart campus maintenance management system.
+
 ## ✨ Features
 
 ### 🎓 Student Portal
